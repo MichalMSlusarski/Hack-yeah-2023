@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class BuildingManager : MonoBehaviour
 
     private void MouseOverCheck()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) { return; }
+        
         if (!isInBuildMode) { return; }
 
         Ray ray;

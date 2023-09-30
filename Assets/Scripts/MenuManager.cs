@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
 
     public void MoveItemOut()
     {
-        if(isTile) {DeselectAllItems();}
+        //if(isTile) {DeselectAllItems();}
         
         for (int i = 0; i < items.Length; i++)
         {
@@ -39,11 +39,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    void DeselectAllItems()
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            items[i].GetComponent<TileCard>().Deselect();
-        }
-    }
+    // void DeselectAllItems()
+    // {
+    //     for (int i = 0; i < items.Length; i++)
+    //     {
+    //         items[i].GetComponent<TileCard>().Deselect();
+    //     }
+    // }
 }
