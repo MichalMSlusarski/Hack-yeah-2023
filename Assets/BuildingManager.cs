@@ -52,10 +52,11 @@ public class BuildingManager : MonoBehaviour
     {
         if (tile.transform.childCount > 0) { return; }
 
-        Collider selectedBuildingCollider = buildingBlocks[selectedBuilding].GetComponent<Collider>();
         Collider tileCollider = tile.GetComponent<Collider>();
+        Collider buildingCollider = buildingBlocks[selectedBuilding].GetComponent<Collider>();
+        float offset = tileCollider.bounds.extents.y + buildingCollider.bounds.extents.y;
 
-        Vector3 position = new Vector3(tile.transform.position.x, tileCollider.bounds.max.y + selectedBuildingCollider.bounds.size.y, tile.transform.position.z);
+        Vector3 position = new Vector3(tile.transform.position.x, tile.transform.position.y + offset, tile.transform.position.z);
 
         if (Input.GetMouseButtonDown(0))
         {
