@@ -41,40 +41,27 @@ public class BuildingManager : MonoBehaviour
         {
             Debug.Log("Mouse is over: " + hit.transform.name + " " + hit.transform.tag);
             
-            // if (Input.GetMouseButtonDown(0))
-            // {
-            //     Debug.Log("Clicked on " + hit.transform.name);
-            // }
-            
-            if (hit.transform.CompareTag("Tile"))
+            if (hit.transform.CompareTag("Tile") || hit.transform.CompareTag("Block"))
             {
-                PlaceMockBuilding(hit.transform.gameObject);
+                PlaceBuilding(hit.transform.gameObject);
             }
         }
     }
 
-    private void PlaceMockBuilding(GameObject tile)
+    private void PlaceBuilding(GameObject tile)
     {
         if (tile.transform.childCount > 0) { return; }
 
-        Transform selectedBuildingTransform = buildingBlocks[selectedBuilding].transform;
-        //float offest = selectedBuildingTransform.localScale.y / 2f;
-        float offest = 1f;
+        Collider selectedBuildingCollider = buildingBlocks[selectedBuilding].GetComponent<Collider>();
+        Collider tileCollider = tile.GetComponent<Collider>();
 
-        Vector3 position = new Vector3(tile.transform.position.x, tile.transform.position.y + offest, tile.transform.position.z);
-
-        // GameObject mockBuilding = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
-        // mockBuilding.GetComponent<Rigidbody>().isKinematic = true;
-        // mockBuilding.transform.SetParent(tile.transform);
-        // mockBuilding.GetComponent<MeshRenderer>().material = mockMaterial;
-        // Destroy(mockBuilding, 0.2f);
+        Vector3 position = new Vector3(tile.transform.position.x, tileCollider.bounds.max.y + selectedBuildingCollider.bounds.size.y, tile.transform.position.z);
 
         if (Input.GetMouseButtonDown(0))
         {
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
             Debug.Log("Building placed at " + position);
             building.GetComponent<Rigidbody>().isKinematic = true;
-            //Destroy(mockBuilding);
             OnCard?.Invoke();
         }
     }
@@ -82,7 +69,7 @@ public class BuildingManager : MonoBehaviour
     public void Play()
     {
         isInBuildMode = false;
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Tile");
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
         foreach (GameObject block in blocks)
         {
             block.GetComponent<Rigidbody>().isKinematic = false;
