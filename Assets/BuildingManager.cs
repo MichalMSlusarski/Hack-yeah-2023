@@ -63,5 +63,15 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    public void Play()
+    {
+        isInBuildMode = false;
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach (GameObject block in blocks)
+        {
+            block.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
     
 }
