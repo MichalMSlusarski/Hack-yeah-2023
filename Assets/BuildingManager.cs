@@ -17,6 +17,11 @@ public class BuildingManager : MonoBehaviour
 
     public Material mockMaterial;
 
+    private void Redo()
+    {
+        // ... 
+    }
+
     private void Update()
     {
         MouseOverCheck();
@@ -30,10 +35,17 @@ public class BuildingManager : MonoBehaviour
 
         Ray ray;
         RaycastHit hit;
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Touch touch = Input.GetTouch(0); ray = Camera.main.ScreenPointToRay(touch.positon);  
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 10000f, layerMask))
         {
+            Debug.Log("Mouse is over: " + hit.transform.name + " " + hit.transform.tag);
+            
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     Debug.Log("Clicked on " + hit.transform.name);
+            // }
+            
             if (hit.transform.CompareTag("Tile"))
             {
                 PlaceMockBuilding(hit.transform.gameObject);
@@ -45,20 +57,24 @@ public class BuildingManager : MonoBehaviour
     {
         if (tile.transform.childCount > 0) { return; }
 
-        Vector3 position = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.501f, tile.transform.position.z);
+        Transform selectedBuildingTransform = buildingBlocks[selectedBuilding].transform;
+        //float offest = selectedBuildingTransform.localScale.y / 2f;
+        float offest = 1f;
 
-        GameObject mockBuilding = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
-        mockBuilding.GetComponent<Rigidbody>().isKinematic = true;
-        mockBuilding.transform.SetParent(tile.transform);
-        mockBuilding.GetComponent<MeshRenderer>().material = mockMaterial;
-        Destroy(mockBuilding, 0.15f);
+        Vector3 position = new Vector3(tile.transform.position.x, tile.transform.position.y + offest, tile.transform.position.z);
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        // GameObject mockBuilding = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
+        // mockBuilding.GetComponent<Rigidbody>().isKinematic = true;
+        // mockBuilding.transform.SetParent(tile.transform);
+        // mockBuilding.GetComponent<MeshRenderer>().material = mockMaterial;
+        // Destroy(mockBuilding, 0.2f);
+
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Placed building");
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
+            Debug.Log("Building placed at " + position);
             building.GetComponent<Rigidbody>().isKinematic = true;
-            Destroy(mockBuilding);
+            //Destroy(mockBuilding);
             OnCard?.Invoke();
         }
     }
@@ -66,7 +82,7 @@ public class BuildingManager : MonoBehaviour
     public void Play()
     {
         isInBuildMode = false;
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Tile");
         foreach (GameObject block in blocks)
         {
             block.GetComponent<Rigidbody>().isKinematic = false;

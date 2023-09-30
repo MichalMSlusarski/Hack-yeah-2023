@@ -18,6 +18,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2348900251283308972, guid: 401b3caf5be0f8d4ba2a0f08fe3f5d4e,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2826054284238789016, guid: 401b3caf5be0f8d4ba2a0f08fe3f5d4e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,6 +71,11 @@ PrefabInstance:
     - target: {fileID: 2826054284238789016, guid: 401b3caf5be0f8d4ba2a0f08fe3f5d4e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365576917208712752, guid: 401b3caf5be0f8d4ba2a0f08fe3f5d4e,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5875384663866062736, guid: 401b3caf5be0f8d4ba2a0f08fe3f5d4e,

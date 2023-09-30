@@ -21,10 +21,10 @@ public class Card : MonoBehaviour
         BuildingManager.OnCard += Deselect;
     }
     
-    
     public void Selected()
     {
         isSelected = true;
+        BuildingManager.isInBuildMode = true;
         BuildingManager.selectedBuilding = cardIndex;
         gameObject.transform.DOScale(desiredSize, lerpTime);
     }
@@ -33,6 +33,11 @@ public class Card : MonoBehaviour
     {
         isSelected = false;
         gameObject.transform.DOScale(initialScale, lerpTime);
+    }
+
+    public void Deselector()
+    {
+        BuildingManager.isInBuildMode = false;
     }
 
 }
