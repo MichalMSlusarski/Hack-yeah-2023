@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class BuildingManager : MonoBehaviour
 {
+    public delegate void OnCardSelected();
+    public event OnCardSelected OnCard;
+    
     public GameObject[] buildingBlocks;
 
     public LayerMask layerMask;
@@ -49,9 +52,13 @@ public class BuildingManager : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Debug.Log("Placed building");
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
             building.GetComponent<Rigidbody>().isKinematic = true;
             Destroy(mockBuilding);
+            OnCard?.Invoke();
         }
     }
+
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DinosaurAI : MonoBehaviour
 {
@@ -8,14 +9,21 @@ public class DinosaurAI : MonoBehaviour
 
     public float speed = 1f;
 
-    public Animator animator;
+    
 
     public GameObject target;
 
     public Transform tail;
 
-    void TailAttack()
+    private void TailAttack()
     {
-        
+
+    }
+
+    private void Walk()
+    {
+        // Dinosaur walks just like in toy by turning itself on the Y axis as it walks
+
+
     }
 }
