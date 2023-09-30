@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class DinosaurAI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // The dinosaur will move towards the building when it reaches the building it will try to use its tail to destroy the building
 
-    // Update is called once per frame
-    void Update()
+    public float speed = 1f;
+
+    public Animator animator;
+
+    public GameObject target;
+
+    public Transform tail;
+
+    void TailAttack()
     {
         
     }
