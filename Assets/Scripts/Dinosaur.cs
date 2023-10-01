@@ -17,14 +17,10 @@ public class Dinosaur : MonoBehaviour
     public void Attack()
     {
         transform.DOLookAt(target.position, 0.5f);
-        transform.DOMove(target.position, 0.5f).OnComplete(() =>
-        {
-            animator.SetBool("isAttacking", false);
-        });
-        animator.SetBool("isAttacking", true);
+        transform.DOMove(target.position, 0.5f);
 
         // turn the dinosaur 90 degrees along the Y axis
-        transform.DORotate(new Vector3(0f, 90f, 0f), 0.5f);
+        transform.DORotate(new Vector3(0f, 0f, 0f), 0.5f);
 
         // Create an explosion to every "block" in the proximity of the tail rigidbody
         Collider[] colliders = Physics.OverlapSphere(tail.transform.position, 1f);
