@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
-    [SerializeField] SO_Integer sceneToLoad;
-    [SerializeField] int desiredNextSceneIndex;
+    //[SerializeField] SO_Integer sceneToLoad;
+    //[SerializeField] int desiredNextSceneIndex;
    // [SerializeField] AudioSource audioSource;
     
     public void LoadNextScene()
@@ -15,15 +15,15 @@ public class UIMainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void LoadNextSceneAtIndex()
-    {
-        SceneManager.LoadScene(sceneToLoad.Integer, LoadSceneMode.Single);
-    }
+    // public void LoadNextSceneAtIndex()
+    // {
+    //     SceneManager.LoadScene(sceneToLoad.Integer, LoadSceneMode.Single);
+    // }
 
-    public void SetNextSceneIndexTo()
-    {
-        sceneToLoad.Integer = desiredNextSceneIndex;
-    }
+    // public void SetNextSceneIndexTo()
+    // {
+    //     sceneToLoad.Integer = desiredNextSceneIndex;
+    // }
 
     public void QuitGame()
     {

@@ -8,6 +8,8 @@ TagManager:
   - Menu
   - Block
   - TallBlock
+  - Flag
+  - Dinosaur
   layers:
   - Default
   - TransparentFX

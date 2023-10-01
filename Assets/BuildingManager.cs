@@ -39,12 +39,10 @@ public class BuildingManager : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 10000f, layerMask))
-        {
-            Debug.Log("Mouse is over: " + hit.transform.name + " " + hit.transform.tag);
-            
+        {            
             if (hit.transform.CompareTag("Tile"))
             {
-                PlaceBuilding(hit.transform.gameObject, .5f);
+                PlaceBuilding(hit.transform.gameObject, .57f);
             }
             else if (hit.transform.CompareTag("Block"))
             {
@@ -69,7 +67,6 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
-            Debug.Log("Building placed at " + position);
             building.GetComponent<Rigidbody>().isKinematic = true;
             OnCard?.Invoke();
         }
@@ -86,17 +83,21 @@ public class BuildingManager : MonoBehaviour
     // }
 
     public void Play()
-{
-    isInBuildMode = false;
-    GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-    GameObject[] tallBlocks = GameObject.FindGameObjectsWithTag("TallBlock");
-    List<GameObject> combinedBlocks = new List<GameObject>(blocks);
-    combinedBlocks.AddRange(tallBlocks);
-    foreach (GameObject block in combinedBlocks)
     {
-        block.GetComponent<Rigidbody>().isKinematic = false;
+        isInBuildMode = false;
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        GameObject[] tallBlocks = GameObject.FindGameObjectsWithTag("TallBlock");
+        List<GameObject> combinedBlocks = new List<GameObject>(blocks);
+        combinedBlocks.AddRange(tallBlocks);
+        foreach (GameObject block in combinedBlocks)
+        {
+            block.GetComponent<Rigidbody>().isKinematic = false;
+        }
+        GameObject flag = GameObject.FindGameObjectsWithTag("Flag")[0];
+        flag.GetComponent<Rigidbody>().isKinematic = false;
+        Dinosaur dinosaur = GameObject.FindGameObjectsWithTag("Dinosaur")[0].GetComponent<Dinosaur>();
+        dinosaur.Attack();
     }
-}
 
     
 }
