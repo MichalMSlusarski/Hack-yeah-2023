@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -18,9 +20,14 @@ public class BuildingManager : MonoBehaviour
 
     public Material mockMaterial;
 
-    private void Redo()
+    List<GameObject> Buildings = new List<GameObject>();
+
+    public int maxBuildingsLeft = 12;
+    public TextMeshProUGUI buildingsLeftText;
+
+    public void Redo()
     {
-        // ... 
+        // deactivate the last building from buildings list, 
     }
 
     private void Update()
@@ -68,19 +75,12 @@ public class BuildingManager : MonoBehaviour
         {
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
             building.GetComponent<Rigidbody>().isKinematic = true;
+            Buildings.Add(building);
+            maxBuildingsLeft--;
+            buildingsLeftText.text = maxBuildingsLeft.ToString();
             OnCard?.Invoke();
         }
     }
-
-    // public void Play()
-    // {
-    //     isInBuildMode = false;
-    //     GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-    //     foreach (GameObject block in blocks)
-    //     {
-    //         block.GetComponent<Rigidbody>().isKinematic = false;
-    //     }
-    // }
 
     public void Play()
     {
