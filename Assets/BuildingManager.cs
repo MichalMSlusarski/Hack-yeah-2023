@@ -30,6 +30,11 @@ public class BuildingManager : MonoBehaviour
         // deactivate the last building from buildings list, 
     }
 
+    private void Start()
+    {
+        buildingsLeftText.text = maxBuildingsLeft.ToString();
+    }
+
     private void Update()
     {
         MouseOverCheck();
@@ -71,7 +76,7 @@ public class BuildingManager : MonoBehaviour
 
         Vector3 position = new Vector3(tile.transform.position.x, tile.transform.position.y + offset, tile.transform.position.z);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && maxBuildingsLeft > 0)
         {
             GameObject building = Instantiate(buildingBlocks[selectedBuilding], position, Quaternion.identity);
             building.GetComponent<Rigidbody>().isKinematic = true;
